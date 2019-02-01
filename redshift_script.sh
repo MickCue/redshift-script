@@ -12,14 +12,18 @@ currentday=$(date +"%a")
 echo $currenttime
 echo $currentday
 
-if [[  $currenttime > "20:00" && $currentday != "Sat" && $currentday != "Fri" ]];
+if [[  $currenttime > "20:00" && $currenttime > "06:00" && $currentday != "Sat" && $currentday != "Fri" ]];
 then
 	echo "Killing Blue"
 	redshift -P -O 1000
 
-else
+elif [[ $currentday != "Fri" && $currentday != "Sat" ]]
+then
 	echo "Blue Light"
-	redshift -x
+	redshift -x;
+
+else
+	echo "Noting left to process"
 
 fi
 
